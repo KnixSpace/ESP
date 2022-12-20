@@ -2,13 +2,10 @@ package EHMS;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
-public class Portal {
+public class Portal extends Variables{
     boolean patPassword(int uID,String password)throws IOException{
-        BufferedReader filer = new BufferedReader(new FileReader("Patient.csv"));
+        filer = new BufferedReader(new FileReader("Patient.csv"));
         filer.readLine();
-        String line;
-        String[] data;
         while ((line = filer.readLine()) != null) {
             data = line.split(",");
             if (uID == Integer.parseInt(data[0]) && password.equals(data[1])) {
@@ -19,10 +16,8 @@ public class Portal {
     }
     boolean docPassword(int uID,String password)throws IOException{
 
-        BufferedReader filer = new BufferedReader(new FileReader("Doctor.csv"));
+        filer = new BufferedReader(new FileReader("Doctor.csv"));
         filer.readLine();
-        String line;
-        String[] data;
         while ((line= filer.readLine())!=null) {
             data = line.split(",");
             if (uID==Integer.parseInt(data[0]) && password.equals(data[1])) {
@@ -32,17 +27,15 @@ public class Portal {
         return false;
     }
     public void adminPortal() throws IOException {
-        int choice;
-        String pass,userName;
-        Scanner input=new Scanner(System.in);
+        String userName;
         Headers header=new Headers();
         Admin admin=new Admin();
         while (true){
             System.out.print("Enter User Name : ");
             userName=input.next();
             System.out.print("Password : ");
-            pass=input.next();
-            if(pass.equals("admin") && userName.equals("APPK")){
+            password=input.next();
+            if(password.equals("admin") && userName.equals("APPK")){
                 while (true){
                     header.AdminHeader();
                     System.out.print("Enter Your Choice : ");
@@ -55,7 +48,8 @@ public class Portal {
                             case 3 : admin.addDoctor(); break;
                             case 4 : admin.removeDoctor(); break;
                             case 5 : admin.viewAppointments(); break;
-                            case 6 : admin.viewFeedbacks();break;
+                            case 6 : admin.viewReports(); break;
+                            case 7 : admin.viewFeedbacks();break;
                         }
                     }
                     else if (choice == 8){
@@ -73,19 +67,13 @@ public class Portal {
         }
     }
     public void doctorPortal() throws IOException {
-        int id;
-        String pass;
-        int choice;
-        boolean status;
-        Scanner input = new Scanner(System.in);
         while (true) {
-            System.out.print("User : ");
-            id = input.nextInt();
+            System.out.print("User ID : ");
+            userId = input.nextInt();
             System.out.print("Password  : ");
-            pass = input.next();
+            password = input.next();
             Headers headers=new Headers();
-            status = docPassword(id,pass);
-            if (status) {
+            if (docPassword(userId,password)) {
                 while (true) {
                     Doctor doctor = new Doctor();
                     headers.DoctorHeader();
@@ -95,13 +83,13 @@ public class Portal {
                     if (choice >= 1 && choice <= 3) {
                         switch (choice) {
                             case 1:
-                                doctor.viewProfile(id);
+                                doctor.viewProfile(userId);
                                 break;
                             case 2:
-                                doctor.viewAppointment(id);
+                                doctor.viewAppointment(userId);
                                 break;
                             case 3:
-                                doctor.diagnosePatient(id);
+                                doctor.diagnosePatient(userId);
                                 break;
                         }
                     } else if (choice == 4) {
@@ -119,19 +107,13 @@ public class Portal {
         }
     }
     public void patientPortal()throws IOException{
-        int id;
-        String pass;
-        int choice;
-        boolean status;
-        Scanner input = new Scanner(System.in);
         Headers head = new Headers();
         while (true) {
-            System.out.print("ID : ");
-            id = input.nextInt();
+            System.out.print("User ID : ");
+            userId = input.nextInt();
             System.out.print("Password  : ");
-            pass = input.next();
-            status = patPassword(id, pass);
-            if (status) {
+            password = input.next();
+            if (patPassword(userId, password)) {
                 while (true) {
                     head.PatientHeader();
                     Patient patient = new Patient();
@@ -139,26 +121,28 @@ public class Portal {
                     System.out.print("Enter your choice ");
                     choice = input.nextInt();
                     input.nextLine();
-                    if (choice >= 1 && choice <= 5) {
+                    if (choice >= 1 && choice <= 6) {
                         switch (choice) {
                             case 1:
-                                patient.viewProfile(id);
+                                patient.viewProfile(userId);
                                 break;
                             case 2:
                                 admin.viewDoctor();
                                 break;
                             case 3:
-                                patient.bookAppointment(id);
+                                patient.bookAppointment(userId);
                                 break;
                             case 4:
-                                patient.viewAppointment(id);
+                                patient.viewAppointment(userId);
                                 break;
                             case 5:
-                                patient.feedBack(id);
+                                patient.report(userId);
                                 break;
-
+                            case 6:
+                                patient.feedBack(userId);
+                                break;
                         }
-                    } else if (choice == 6) {
+                    } else if (choice == 7) {
 
                         break;
                     } else {
@@ -176,7 +160,6 @@ public class Portal {
         }
     }
     public void newSignup() throws IOException {
-
         NewPatient signup = new NewPatient();
         signup.newPatient();
     }

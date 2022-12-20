@@ -9,11 +9,13 @@ public class Patient extends Variables{
         while ((line = filer.readLine()) != null) {
             data = line.split(",");
             if (pID == Integer.parseInt(data[0])) {
-                System.out.printf("Patient ID:     %-15s\n", data[0]);
-                System.out.printf("Patient Name:   %-15s\n", data[2]);
-                System.out.printf("Gender:         %-15s\n", data[4]);
-                System.out.printf("Blood Group:    %-15s\n", data[6]);
-                System.out.printf("Contact Number: %-15s\n", data[7]);
+                System.out.println("\n+---------------------------------+");
+                System.out.printf("| Patient ID:     %-15s |\n", data[0]);
+                System.out.printf("| Patient Name:   %-15s |\n", data[2]);
+                System.out.printf("| Gender:         %-15s |\n", data[4]);
+                System.out.printf("| Blood Group:    %-15s |\n", data[6]);
+                System.out.printf("| Contact Number: %-15s |\n", data[7]);
+                System.out.println("+---------------------------------+\n");
             }
         }
         filer.close();
@@ -23,7 +25,7 @@ public class Patient extends Variables{
         String  problem,specialization=null,docnm=null,doctype=null,qulif=null;
         int dID;
         int aID= req.AutoId("Appointment.csv");
-        System.out.println("Appointment ID : "+ aID);
+        System.out.println("\nAppointment ID : "+ aID);
         System.out.print("Enter Your Problem : ");
         problem=input.nextLine();
         System.out.println("+------------------------+");
@@ -65,8 +67,9 @@ public class Patient extends Variables{
         System.out.print("Choose Doctor ID : ");
         dID=input.nextInt();
         input.nextLine();
-        System.out.println("Appointment Booked Successfully");
+        System.out.println("Appointment Booked Successfully\n");
         filer.close();
+
         filer=new BufferedReader(new FileReader("Doctor.csv"));
         filer.readLine();
         while((line=filer.readLine())!=null) {
@@ -93,14 +96,14 @@ public class Patient extends Variables{
         filer.close();
 
         int status=0;
-        String appdata=(aID+","+pID+","+problem+","+docnm+","+dID+","+doctype+","+qulif+","+pName+","+null+","+null+","+status+"\n");
+        String appdata=(aID+","+pID+","+problem+","+docnm+","+dID+","+doctype+","+qulif+","+pName+","+status+"\n");
         filew=new BufferedWriter(new FileWriter("Appointment.csv",true));
         filew.write(appdata);
         filew.close();
     }
     public void viewAppointment(int pID) throws IOException {
         req=new Required();
-        if(req.check("Appointment.csv",pID)){
+        if(req.pcheck("Appointment.csv",pID)){
             filer = new BufferedReader(new FileReader("Appointment.csv"));
             filer.readLine();
             while ((line = filer.readLine()) != null) {
@@ -137,5 +140,30 @@ public class Patient extends Variables{
         String fdata=(pID+","+points+","+nature+","+comments);
         filew.write("\n"+fdata);
         filew.close();
+    }
+    public void report(int pID) throws IOException{
+        req=new Required();
+        if(req.check("Report.csv")){
+            filer =new BufferedReader(new FileReader("Report.csv"));
+            filer.readLine();
+            System.out.println("+----------------------------------------------+");
+            while ((line=filer.readLine())!=null){
+                data=line.split(",");
+                if(Integer.parseInt(data[2])==pID){
+                    System.out.println("+----------------------------------------------+");
+                    System.out.printf("| Report ID : %-2s                Doctor-ID : %-2s |\n",data[0],data[3]);
+                    System.out.printf("| Doctor Name : %-15s                |\n",data[5]);
+                    System.out.println("+----------------------------------------------+");
+                    System.out.printf("| Problem : %-25s          |\n",data[6]);
+                    System.out.printf("| Prescription : %-29s |\n",data[7]);
+                    System.out.printf("| Comment : %-34s |\n",data[8]);
+                    System.out.println("+----------------------------------------------+");
+                }
+            }
+            filer.close();
+        }
+        else {
+            System.out.println("No Report received");
+        }
     }
 }

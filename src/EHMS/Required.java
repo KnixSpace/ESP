@@ -32,20 +32,32 @@ public class Required extends Variables{
             return 1;
         }
     }
-    public boolean check(String name,int id)throws IOException {
-        filer = new BufferedReader(new FileReader(name));
+    public boolean dcheck(String fname, int id)throws IOException {
+        filer = new BufferedReader(new FileReader(fname));
         filer.readLine();
         while ((line=filer.readLine())!=null){
             data=line.split(",");
-            if((Integer.parseInt(data[4])==id && Integer.parseInt(data[10])==0)||(Integer.parseInt(data[1])==id && Integer.parseInt(data[10])==0)){
+            if(Integer.parseInt(data[4])==id && Integer.parseInt(data[8])==0){
                 count++;
             }
         }
         filer.close();
         return count > 0;
     }
-    public boolean check(String name)throws IOException{
-        filer = new BufferedReader(new FileReader(name));
+    public boolean pcheck(String fname, int id)throws IOException {
+        filer = new BufferedReader(new FileReader(fname));
+        filer.readLine();
+        while ((line=filer.readLine())!=null){
+            data=line.split(",");
+            if(Integer.parseInt(data[1])==id){
+                count++;
+            }
+        }
+        filer.close();
+        return count > 0;
+    }
+    public boolean check(String fname)throws IOException{
+        filer = new BufferedReader(new FileReader(fname));
         filer.readLine();
         while ((line=filer.readLine())!=null){
             count++;

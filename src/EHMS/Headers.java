@@ -19,8 +19,9 @@ public class Headers {
         System.out.printf("|           %-29s|\n","3]Add Doctor");
         System.out.printf("|           %-29s|\n","4]Remove Doctor");
         System.out.printf("|           %-29s|\n","5]Appointments");
-        System.out.printf("|           %-29s|\n","6]Feedbacks");
-        System.out.printf("|           %-29s|\n","7]Logout");
+        System.out.printf("|           %-29s|\n","6]Reports");
+        System.out.printf("|           %-29s|\n","7]Feedback");
+        System.out.printf("|           %-29s|\n","8]Logout");
         System.out.println("+----------------------------------------+");
     }
     public void DoctorHeader(){
@@ -43,8 +44,9 @@ public class Headers {
         System.out.printf("|           %-29s|\n","2]Doctor List");
         System.out.printf("|           %-29s|\n","3]Book New Appointment");
         System.out.printf("|           %-29s|\n","4]Appointments");
-        System.out.printf("|           %-29s|\n","5]Give Feedback");
-        System.out.printf("|           %-29s|\n","6]Logout");
+        System.out.printf("|           %-29s|\n","5]Reports");
+        System.out.printf("|           %-29s|\n","6]Give Feedback");
+        System.out.printf("|           %-29s|\n","7]Logout");
         System.out.println("+----------------------------------------+");
     }
 }

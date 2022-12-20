@@ -20,9 +20,9 @@ public class Registration extends Variables{
             }
         }
         System.out.println("    Signed-Up Successfully    ");
-        System.out.println("+*+*+*+*+*+*+*+*+*+*+*+*+*+*+");
-        System.out.println("Fill out Following Details");
-        System.out.println("+*+*+*+*+*+*+*+*+*+*+*+*+*+*+");
+        System.out.println("+--------------------------------------+");
+        System.out.println("+      Fill out Following Details      +");
+        System.out.println("+--------------------------------------+");
         System.out.print("First Name : ");
         fullname =input.next();
         System.out.print("Last Name : ");
@@ -83,9 +83,9 @@ public class Registration extends Variables{
             }
         }
         System.out.println("    SignedUP Successfully    ");
-        System.out.println("+*+*+*+*+*+*+*+*+*+*+*+*+*+*+");
-        System.out.println("Fill out Following Details");
-        System.out.println("+*+*+*+*+*+*+*+*+*+*+*+*+*+*+");
+        System.out.println("+--------------------------------------+");
+        System.out.println("+      Fill out Following Details      +");
+        System.out.println("+--------------------------------------+");
         System.out.print("First Name : ");
         fullname =input.next();
         System.out.print("Last Name : ");
