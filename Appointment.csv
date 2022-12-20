@@ -1,4 +1,4 @@
-AID,PID,Problem,Doctor-Name,DID,Doctor-type,Qualification,Patient-Name,Prescription,Comment,Status
+AID,PID,Problem,Doctor-Name,DID,Doctor-type,Qualification,Patient-Name,Status
 1,1,headache,Deepak,11,GENERAL,MS,Ayushi,1
 2,15,Running Nose,Ankita,7,GENERAL,BAMS,Hiral,1
 3,18,Throat,Harish,13,ENT,PhD,Rajvi,1
