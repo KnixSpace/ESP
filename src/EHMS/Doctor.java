@@ -1,6 +1,8 @@
 package EHMS;
 
 import java.io.*;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Doctor extends  Variables{
     public void viewProfile(int dID) throws IOException {
@@ -62,9 +64,16 @@ public class Doctor extends  Variables{
             }
             filer.close();
 
-            System.out.print("Enter Appointment Id : ");
-            digId=input.nextInt();
-            input.nextLine();
+            while (true){
+                try{
+                    Scanner input =new Scanner(System.in);
+                    System.out.print("Enter Appointment Id : ");
+                    digId=input.nextInt();
+                    break;
+                }catch (InputMismatchException ie){
+                    System.out.println("Enter Valid Id");
+                }
+            }
             System.out.print("Prescription : ");
             prescription=input.nextLine();
             System.out.print("Comments : ");

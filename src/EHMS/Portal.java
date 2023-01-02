@@ -2,6 +2,9 @@ package EHMS;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class Portal extends Variables{
     boolean patPassword(int uID,String password)throws IOException{
         filer = new BufferedReader(new FileReader("Patient.csv"));
@@ -37,10 +40,17 @@ public class Portal extends Variables{
             password=input.next();
             if(password.equals("admin") && userName.equals("APPK")){
                 while (true){
-                    header.AdminHeader();
-                    System.out.print("Enter Your Choice : ");
-                    choice=input.nextInt();
-                    input.nextLine();
+                    while (true){
+                        try{
+                            header.AdminHeader();
+                            Scanner input = new Scanner(System.in);
+                            System.out.print("Enter Your choice : ");
+                            choice=input.nextInt();
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Invalid Entry!!.");
+                        }
+                    }
                     if(choice>=1 && choice<=7){
                         switch (choice){
                             case 1 : admin.viewDoctor(); break;
@@ -68,18 +78,33 @@ public class Portal extends Variables{
     }
     public void doctorPortal() throws IOException {
         while (true) {
-            System.out.print("User ID : ");
-            userId = input.nextInt();
+            while (true){
+                try{
+                    Scanner input=new Scanner(System.in);
+                    System.out.print("User ID : ");
+                    userId = input.nextInt();
+                    break;
+                } catch (InputMismatchException e) {
+                    System.out.println("Enter Valid User ID");
+                }
+            }
             System.out.print("Password  : ");
             password = input.next();
             Headers headers=new Headers();
             if (docPassword(userId,password)) {
                 while (true) {
                     Doctor doctor = new Doctor();
-                    headers.DoctorHeader();
-                    System.out.print("Enter your choice : ");
-                    choice = input.nextInt();
-                    input.nextLine();
+                    while (true){
+                        try{
+                            Scanner input=new Scanner(System.in);
+                            headers.DoctorHeader();
+                            System.out.print("Enter your choice : ");
+                            choice = input.nextInt();
+                            break;
+                        }catch (InputMismatchException e){
+                            System.out.println("Invalid Entry!!.");
+                        }
+                    }
                     if (choice >= 1 && choice <= 3) {
                         switch (choice) {
                             case 1:
@@ -109,18 +134,33 @@ public class Portal extends Variables{
     public void patientPortal()throws IOException{
         Headers head = new Headers();
         while (true) {
-            System.out.print("User ID : ");
-            userId = input.nextInt();
+            while (true){
+                try{
+                    Scanner input=new Scanner(System.in);
+                    System.out.print("User ID : ");
+                    userId = input.nextInt();
+                    break;
+                } catch (InputMismatchException e) {
+                    System.out.println("Enter Valid User ID");
+                }
+            }
             System.out.print("Password  : ");
             password = input.next();
             if (patPassword(userId, password)) {
                 while (true) {
-                    head.PatientHeader();
                     Patient patient = new Patient();
                     Admin admin = new Admin();
-                    System.out.print("Enter your choice ");
-                    choice = input.nextInt();
-                    input.nextLine();
+                    while (true){
+                        try{
+                            head.PatientHeader();
+                            Scanner input=new Scanner(System.in);
+                            System.out.print("Enter your choice ");
+                            choice = input.nextInt();
+                            break;
+                        }catch (InputMismatchException e){
+                            System.out.println("Invalid Entry!!.");
+                        }
+                    }
                     if (choice >= 1 && choice <= 6) {
                         switch (choice) {
                             case 1:

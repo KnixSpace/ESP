@@ -3,6 +3,9 @@ package EHMS;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class Registration extends Variables{
     public void doctorRegister(int did) throws IOException {
         filew=new BufferedWriter(new FileWriter("Doctor.csv",true));
@@ -45,8 +48,16 @@ public class Registration extends Variables{
         System.out.printf("| 5] %-8s 6]%-8s |\n","KIDNEY","GENERAL");
         System.out.println("+------------------------+");
         while (true){
-            System.out.print("Enter Your Choice : ");
-            choice=input.nextInt();
+            while (true){
+                try {
+                    Scanner input=new Scanner(System.in);
+                    System.out.print("Enter Your Choice : ");
+                    choice=input.nextInt();
+                    break;
+                }catch (InputMismatchException ie){
+                    System.out.println("Invalid entry!!");
+                }
+            }
             if(choice>=1 && choice<=6){
                 switch (choice){
                     case 1:spec="ENT"; break;

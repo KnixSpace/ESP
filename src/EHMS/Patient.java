@@ -1,6 +1,9 @@
 package EHMS;
 
 import java.io.*;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class Patient extends Variables{
     public void viewProfile(int pID) throws IOException {
 
@@ -34,8 +37,16 @@ public class Patient extends Variables{
         System.out.printf("| 5] %-8s 6]%-8s |\n","KIDNEY","GENERAL");
         System.out.println("+------------------------+");
         while (true){
-            System.out.print("Enter Your Choice : ");
-            choice=input.nextInt();
+            while (true){
+                try{
+                    Scanner input=new Scanner(System.in);
+                    System.out.print("Enter Your Choice : ");
+                    choice=input.nextInt();
+                    break;
+                }catch (InputMismatchException ie){
+                    System.out.println("Invalid entry!!");
+                }
+            }
             if(choice==1||choice==2||choice==3||choice==4||choice==5||choice==6){
                 switch (choice){
                     case 1:specialization="ENT"; break;
